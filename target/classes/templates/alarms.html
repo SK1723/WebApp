@@ -1,0 +1,98 @@
+<html>
+<head><title>Home Page</title></head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<style>
+	* {
+	    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;/* <-- fonts */
+	}
+	body{
+		/* padding:10px; */
+		text-align:center;
+		background-color: #ACF0FA;
+		vertical-align: middle;
+	}
+	
+	h1{
+		font-size: 48px;
+		margin: 0;
+	}
+	
+	.div {
+	    border-radius: 5px;
+	    width: 50%;
+	    margin: 0px auto;
+	    float: none;
+	}
+	.jumbotron{
+		background-color: #0FD0EF;
+	}
+
+	.padding{
+		padding: 0 20px 0;
+	}
+	
+	.light-blue{
+		background-color: #DDFBFF;
+	}
+
+</style>
+<body>
+
+<div class="jumbotron jumbotron-fluid">
+	<h1>Welcome to Bellbird!</h1>
+</div>
+
+
+
+	<form class="input-group mb-3 padding" action="#" th:action="@{/alarms}" th:object="${alarm}" method="post">
+	  <input type="text" th:field="*{alarmName}" class="form-control light-blue" placeholder="Enter Alarm Name" aria-label="Enter Alarm Name" aria-describedby="button-addon2">
+	  <div class="input-group-append">
+	    <input class="btn btn-dark" type="submit" id="button-addon2"></input>
+	  </div>
+  </form>
+
+
+<!-- <div class = "row">
+	<div>
+		 <form class="form-group" action="#" th:action="@{/alarms}" th:object="${alarm}" method="post">
+		    <h1>Alarm Name</h1>
+		     <input class="form-control" aria-describedby="inputGroup-sizing-lg" type="text" th:field="*{alarmName}" /><
+		    <input class = "btn btn-dark" type="submit" value="Submit" /></td>
+		</form> 
+	</div>   
+</div> -->
+
+<br/>
+<div>
+  <table class = "table table-striped table-hover light-blue">
+	<tr class="col-md-7">
+	  <th>Date Created</th>
+	  <th>Alarm Name</th>
+	  <th>Number of Votes</th>
+	  <th>Like</th>
+	</tr>
+  	<tr class="col-md-7" th:each="alarm : ${alarms}">
+	  <td th:text="${alarm.getAlarmDate()}"></td>
+	  <td th:text="${alarm.getAlarmName()}">Oops</td>
+	  <td th:text="${alarm.getNumberOfVotes()}">0</td>
+	  <td>
+	  	<form action="#" th:action="@{/upVote(alarmId=${alarm.alarmId})}" method="post">
+	  		<input type ="submit" value = "+">	
+	  	</form>
+	  </td>
+	 </tr>
+  </table>
+</div>
+
+ <br/>
+ 
+ <blockquote class="blockquote text-right padding">
+  <p class="mb-0">And, softer than slumber, and sweeter than singing, <br>The notes of the bell birds are running and ringing.</p>
+  <footer class="blockquote-footer">Henry Kendall in <cite title="Source Title">Bell Birds</cite></footer>
+</blockquote>
+
+
+</body>
+</html>
